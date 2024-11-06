@@ -1,15 +1,114 @@
-<h2>Registro</h2>
-<form>
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="username">
-  
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email">
-  
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password">
-  
-  <button type="submit">Registrar</button>
-</form>
+<section class="vh-100" style="background-color: #f4f6f9;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Registro de Usuario</p>
+                
+                <form (ngSubmit)="onRegister(usuarioForm)" #usuarioForm="ngForm" class="mx-1 mx-md-4">
+                  
+                  <!-- Nombre de Usuario -->
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" ngModel class="form-control" required #nombre="ngModel">
+                      <div *ngIf="nombre.invalid && nombre.touched" class="error">
+                        El nombre es requerido.
+                      </div>
+                    </div>
+                  </div>
 
-<p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión aquí</a></p>
+                  <!-- Contraseña -->
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="contrasena">Contraseña</label>
+                        <input type="password" id="contrasena" name="contrasena" ngModel class="form-control" required #contrasena="ngModel">
+                      <div *ngIf="contrasena.invalid && contrasena.touched" class="error">
+                        La contraseña es requerida.
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tipo de Usuario -->
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user-tag fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                    <label class="form-label" for="tipoUsuario">Tipo de Usuario</label>
+                      <select id="tipoUsuario" name="tipoUsuario" ngModel class="form-control" required #tipoUsuario="ngModel">
+                        <option value="ADMINISTRADOR">Administrador</option>
+                        <option value="EDITOR">Editor</option>
+                        <option value="SUSCRIPTOR">Suscriptor</option>
+                        <option value="ESPECIAL">Especial</option>
+                      </select>
+                      
+                      <div *ngIf="tipoUsuario.invalid && tipoUsuario.touched" class="error">
+                        El tipo de usuario es requerido.
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Foto de Perfil -->
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-image fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="fotoPerfil">Foto de Perfil</label>
+                        <input type="file" id="fotoPerfil" name="fotoPerfil" ngModel class="form-control">
+                    </div>
+                  </div>
+
+                  <!-- Hobbies -->
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-pencil-alt fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="hobbies">Hobbies</label>
+                        <textarea id="hobbies" name="hobbies" ngModel class="form-control" rows="4"></textarea>
+                    </div>
+                  </div>
+
+                  <!-- Temas de Interés -->
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lightbulb fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="temasInteres">Temas de Interés</label>
+                        <textarea id="temasInteres" name="temasInteres" ngModel class="form-control" rows="4"></textarea>
+                    </div>
+                  </div>
+
+                  <!-- Descripción -->
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-align-left fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="descripcion">Descripción</label>
+                        <textarea id="descripcion" name="descripcion" ngModel class="form-control" rows="4"></textarea>
+                    </div>
+                  </div>
+
+                  <!-- Gustos -->
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-heart fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="gustos">Gustos</label>
+                        <textarea id="gustos" name="gustos" ngModel class="form-control" rows="4"></textarea>
+                    </div>
+                  </div>
+
+                  <!-- Botón de Registro -->
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary btn-lg" [disabled]="usuarioForm.invalid">Registrar</button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
