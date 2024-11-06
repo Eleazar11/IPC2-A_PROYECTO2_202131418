@@ -1,0 +1,29 @@
+/* Centrado de los botones */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centra los botones en toda la altura */
+    gap: 20px; /* Espacio entre los botones */
+  }
+  
+  /* Estilo común para los botones */
+  .custom-btn {
+    padding: 12px 24px;
+    border: 2px solid #ff6219; /* Bordes naranjas */
+    background-color: transparent;
+    color: #ff6219; /* Color del texto */
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Animación suave para el hover */
+  }
+  
+  /* Efecto de hover (brillo) */
+  .custom-btn:hover {
+    background-color: #ff6219;
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 98, 25, 0.6); /* Brillo al pasar por encima */
+  }
+  

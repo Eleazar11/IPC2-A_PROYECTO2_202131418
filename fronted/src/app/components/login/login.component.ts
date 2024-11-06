@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -12,6 +13,13 @@ export class LoginComponent {
     email: '',
     password: ''
   };
+  constructor(private router: Router) {}
+
+  // Método para navegar a la página de registro
+  navigateTo(path: string) {
+    this.router.navigate([path]);
+  }
+  
   
 }
 
