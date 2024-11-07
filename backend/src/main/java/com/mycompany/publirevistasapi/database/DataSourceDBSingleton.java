@@ -16,9 +16,9 @@ public class DataSourceDBSingleton {
     
     
 
-    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/revistas_online";
+    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/PubliRevistas";
     private static final String USER = "root";
-    private static final String PASSWORD = "123";
+    private static final String PASSWORD = "Eleazar123Colop";
     private static DataSourceDBSingleton UNICA_INSTANCIA_DE_DATASOURCE;
     
     private DataSource datasource;
