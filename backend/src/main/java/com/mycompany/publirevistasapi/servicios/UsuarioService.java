@@ -28,35 +28,85 @@ public class UsuarioService {
 
         switch (usuario.getRol().toString()) {
             case "SUSCRIPTOR":
-                usuario = new Suscriptor(usuario.getNombreUsuario(), usuario.getContrasena());
+                // Asegúrate de tener todos los valores necesarios para crear un Suscriptor
+                usuario = new Suscriptor(
+                        usuario.getNombreUsuario(),
+                        usuario.getContrasena(),
+                        usuario.getRol().toString(),
+                        usuario.getFotoPerfil(),        // Foto de perfil
+                        usuario.getHobbies(),           // Hobbies
+                        usuario.getTemasInteres(),      // Temas de interés
+                        usuario.getDescripcion(),       // Descripción
+                        usuario.getGustos(),            // Gustos
+                        usuario.getFechaCreacion(),     // Fecha de creación
+                        usuario.getEstado()             // Estado
+                );
                 break;
+
             case "EDITOR":
-                usuario = new Editor(usuario.getNombreUsuario(), usuario.getContrasena());
-                agregarCartera = true;
-                
+                // Los editores necesitan una cartera
+                usuario = new Editor(
+                        usuario.getNombreUsuario(),
+                        usuario.getContrasena(),
+                        usuario.getRol().toString(),
+                        usuario.getFotoPerfil(),
+                        usuario.getHobbies(),
+                        usuario.getTemasInteres(),
+                        usuario.getDescripcion(),
+                        usuario.getGustos(),
+                        usuario.getFechaCreacion(),
+                        usuario.getEstado()
+                );
+                agregarCartera = true;  // Agregar cartera para los editores
                 break;
+
             case "ANUNCIANTE":
-                usuario = new Anunciante(usuario.getNombreUsuario(), usuario.getContrasena());
-                agregarCartera = true;
-              
+                // Los anunciantes también necesitan una cartera
+                usuario = new Anunciante(
+                        usuario.getNombreUsuario(),
+                        usuario.getContrasena(),
+                        usuario.getRol().toString(),
+                        usuario.getFotoPerfil(),
+                        usuario.getHobbies(),
+                        usuario.getTemasInteres(),
+                        usuario.getDescripcion(),
+                        usuario.getGustos(),
+                        usuario.getFechaCreacion(),
+                        usuario.getEstado()
+                );
+                agregarCartera = true;  // Agregar cartera para los anunciantes
                 break;
+
             case "ADMINISTRADOR":
-                usuario = new Administrador(usuario.getNombreUsuario(), usuario.getContrasena());
+                // Para los administradores, no se necesita agregar cartera
+                usuario = new Administrador(
+                        usuario.getNombreUsuario(),
+                        usuario.getContrasena(),
+                        usuario.getRol().toString(),
+                        usuario.getFotoPerfil(),
+                        usuario.getHobbies(),
+                        usuario.getTemasInteres(),
+                        usuario.getDescripcion(),
+                        usuario.getGustos(),
+                        usuario.getFechaCreacion(),
+                        usuario.getEstado()
+                );
                 break;
+
             default:
-                //Error
-                break;
+                // Si no coincide con ningún rol, puedes lanzar un error o manejarlo de otra forma
+                throw new IllegalArgumentException("Rol desconocido: " + usuario.getRol().toString());
         }
 
+        // Registro del usuario en la base de datos
         if (usuarioDB.registrarUsuario(usuario)) {
             if (agregarCartera) {
-                carteraDB.crearCartera(usuario);
+                carteraDB.crearCartera(usuario);  // Si el rol es Editor o Anunciante, agregar cartera
             }
         }
     }
-     
- 
+
     public Usuario autenticarUsuario(String nombreUsuario, String contrasena) {
-       return usuarioDB.iniciarSesion(nombreUsuario, contrasena);
+        return usuarioDB.iniciarSesion(nombreUsuario, contrasena);
     }
 }

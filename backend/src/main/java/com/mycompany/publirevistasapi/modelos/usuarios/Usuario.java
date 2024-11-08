@@ -4,52 +4,48 @@
  */
 package com.mycompany.publirevistasapi.modelos.usuarios;
 
+import java.sql.Date;
+
 /**
  *
  * @author 3198935960914 - Eleazar Colop
  */
 public class Usuario {
-    
+    private String nombreUsuario;
+    private String contrasena;
+    private String rol; // Refleja el 'tipo_usuario' en la base de datos (puede ser 'editor', 'administrador', etc.)
+    private String fotoPerfil; // Ruta de la foto de perfil
+    private String hobbies;
+    private String temasInteres;
+    private String descripcion;
+    private String gustos;
+    private Date fechaCreacion;
+    private String estado; // Refleja el estado (activo, inactivo, suspendido)
 
-
-   private String nombreUsuario;
-   private String contrasena;
-   private String texto;
-   private String fotoPerfil;
-   private Rol rol;
-   private String fechaCreacion;
-   
-   
-
-
-   //Constructor para registrar a un usuario
-    public Usuario(String nombreUsuario, String contrasena, Rol rol) {
-         this.nombreUsuario = nombreUsuario;
-         this.contrasena = guardarContrasena(contrasena);
-         this.texto = null;
-         this.fotoPerfil = null;
-         this.rol = rol;
+    public Usuario(String nombreUsuario, String contrasena, String rol, String fotoPerfil, String hobbies, String temasInteres, String descripcion, String gustos, Date fechaCreacion, String estado) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+        this.rol = rol;
+        this.fotoPerfil = fotoPerfil;
+        this.hobbies = hobbies;
+        this.temasInteres = temasInteres;
+        this.descripcion = descripcion;
+        this.gustos = gustos;
+        this.fechaCreacion = fechaCreacion;
+        this.estado = estado;
     }
 
     public Usuario() {
     }
-    
-    
-  
-    //Constructor para recuperar a un usuario de la base de datos
-    public Usuario(String nombreUsuario, String contrasena, String texto, String fotoPerfil, Rol rol, String fechaCreacion) {
+
+    public Usuario(String nombreUsuario, String contrasena, String rol) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
-        this.texto = texto;
-        this.fotoPerfil = fotoPerfil;
         this.rol = rol;
-        this.fechaCreacion = fechaCreacion;
     }
-
-    private String guardarContrasena(String contrasena){
-        Seguridad seguridad = new Seguridad();
-        return seguridad.encriptarContrasena(contrasena);
-    }
+    
+    
+    
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -67,28 +63,12 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    public Rol getRol() {
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(Rol rol) {
+    public void setRol(String rol) {
         this.rol = rol;
-    }
-
-    public String getTexto() {
-        return texto;
-    }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-
-    public String getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(String fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
     }
 
     public String getFotoPerfil() {
@@ -98,5 +78,55 @@ public class Usuario {
     public void setFotoPerfil(String fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
+
+    public String getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public String getTemasInteres() {
+        return temasInteres;
+    }
+
+    public void setTemasInteres(String temasInteres) {
+        this.temasInteres = temasInteres;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getGustos() {
+        return gustos;
+    }
+
+    public void setGustos(String gustos) {
+        this.gustos = gustos;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+  
     
 }

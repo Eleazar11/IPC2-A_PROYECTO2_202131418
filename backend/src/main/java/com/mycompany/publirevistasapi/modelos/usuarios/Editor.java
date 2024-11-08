@@ -4,13 +4,15 @@
  */
 package com.mycompany.publirevistasapi.modelos.usuarios;
 
+import java.sql.Date;
+
 /**
  *
  * @author 3198935960914 - Eleazar Colop
  */
 public class Editor extends Usuario {
 
-    public Editor(String nombreUsuario, String contrasena) {
-        super(nombreUsuario, contrasena, Rol.EDITOR);
+    public Editor(String nombreUsuario, String contrasena, String rol, String fotoPerfil, String hobbies, String temasInteres, String descripcion, String gustos, Date fechaCreacion, String estado) {
+        super(nombreUsuario, contrasena, rol, fotoPerfil, hobbies, temasInteres, descripcion, gustos, fechaCreacion, estado);
     }
 }

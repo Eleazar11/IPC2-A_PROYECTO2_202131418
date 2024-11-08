@@ -16,15 +16,15 @@
               <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: #002;">Ingresa tus datos para ingresar
                 al sistema</h5>
 
-              <!-- Email Input -->
+              <!-- Username Input -->
               <div class="form-outline mb-4">
-                <input type="text" id="email" class="form-control form-control-lg" />
-                <label class="form-label" for="email" style="color: #fff;">Email address</label>
+                <input type="text" id="username" class="form-control form-control-lg" [(ngModel)]="loginData.username" name="username" />
+                <label class="form-label" for="username" style="color: #fff;">Username</label>
               </div>
 
               <!-- Password Input -->
               <div class="form-outline mb-4">
-                <input type="password" id="password" class="form-control form-control-lg" />
+                <input type="password" id="password" class="form-control form-control-lg" [(ngModel)]="loginData.password" name="password" />
                 <label class="form-label" for="password" style="color: #fff;">Password</label>
               </div>
 
