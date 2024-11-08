@@ -16,7 +16,7 @@
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                         <label class="form-label" for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" ngModel class="form-control" required #nombre="ngModel">
+                        <input type="text" id="nombre" name="nombreUsuario" ngModel class="form-control" required #nombre="ngModel">
                       <div *ngIf="nombre.invalid && nombre.touched" class="error">
                         El nombre es requerido.
                       </div>
@@ -100,10 +100,12 @@
 
                   <!-- Botón de Registro -->
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" class="btn btn-primary btn-lg" [disabled]="usuarioForm.invalid">Registrar</button>
+                    <button type="submit" class="btn btn-primary btn-lg" [disabled]="usuarioForm.invalid" (click)="mostrarMensaje()">Registrar</button>
                   </div>
                 </form>
 
+                <!-- Mensaje de Prueba -->
+                <div *ngIf="mensaje" class="alert alert-info">{{ mensaje }}</div>
               </div>
             </div>
           </div>

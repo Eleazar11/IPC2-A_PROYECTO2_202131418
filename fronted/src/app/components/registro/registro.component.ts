@@ -15,8 +15,16 @@ import { TipoUsuario } from '../../entidades/TipoUsuario';
 })
 export class RegistroComponent {
   
+  mensaje: string | null = null; // Propiedad para mostrar un mensaje
+
   // Constructor con la inyección de dependencias
   constructor(private usuariosService: UsuariosService, private router: Router) {}
+
+  // Método para mostrar un mensaje al hacer clic en el botón
+  mostrarMensaje() {
+    this.mensaje = "Le diste click al botón de registrar.";
+    setTimeout(() => this.mensaje = null, 3000); // El mensaje desaparece después de 3 segundos
+  }
 
   // Método para manejar el envío del formulario
   onRegister(form: any) {
