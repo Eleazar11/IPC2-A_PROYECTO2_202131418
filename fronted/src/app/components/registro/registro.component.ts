@@ -14,7 +14,7 @@ import { TipoUsuario } from '../../entidades/TipoUsuario';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent {
-  
+
   // Constructor con la inyección de dependencias
   constructor(private usuariosService: UsuariosService, private router: Router) {}
 
