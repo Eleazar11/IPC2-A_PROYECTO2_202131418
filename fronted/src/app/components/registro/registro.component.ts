@@ -49,7 +49,7 @@ export class RegistroComponent {
       this.usuariosService.registrarUsuario(usuario).subscribe(response => {
         console.log('Usuario registrado:', response);
         // Redirigir a la vista principal después de un registro exitoso
-        this.router.navigate(['/portal']);
+        this.router.navigate(['/home']);
       }, error => {
         console.error('Error al registrar el usuario:', error);
       });
