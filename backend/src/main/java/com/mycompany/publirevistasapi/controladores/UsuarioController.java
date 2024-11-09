@@ -42,6 +42,7 @@ public class UsuarioController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response registrarUsuario(Usuario usuario) {
+        System.out.println("registro called");
         // Validación de datos
         if (usuario.getNombreUsuario() == null || usuario.getNombreUsuario().isEmpty()
                 || usuario.getContrasena() == null || usuario.getContrasena().isEmpty()
