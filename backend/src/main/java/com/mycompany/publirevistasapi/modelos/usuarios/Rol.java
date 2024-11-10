@@ -13,6 +13,5 @@ public enum Rol {
     EDITOR,
     SUSCRIPTOR,
     ANUNCIANTE
-
 }
 

@@ -35,18 +35,18 @@ public class UsuarioDB {
             return false; // El usuario ya existe en la base de datos
         }
 
-        String consulta = "INSERT INTO usuarios (nombre, contrasena, tipo_usuario, descripcion) VALUES (?, ?, ?, ?)";
+        String consulta = "INSERT INTO usuarios (nombre, contrasena, tipo_usuario) VALUES (?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(consulta)) {
             statement.setString(1, usuario.getNombreUsuario());
             statement.setString(2, usuario.getContrasena());
             statement.setString(3, usuario.getRol()); // Tipo de usuario
-            statement.setString(4, usuario.getDescripcion());
 
             int filasAfectadas = statement.executeUpdate();
 
             // Si el usuario es de tipo 'especial', crear registro en carteras_digitales
-            if (usuario.getRol().equals("especial")) {
+            if (usuario.getRol().equals("especial") || usuario.getRol().equals("editor")) {
                 registrarCarteraDigital(usuario.getNombreUsuario());
+                System.out.println("se creo una cartera digital");
             }
 
             return filasAfectadas > 0;

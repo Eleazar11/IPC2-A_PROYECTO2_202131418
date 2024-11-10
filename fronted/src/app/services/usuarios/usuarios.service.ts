@@ -68,7 +68,7 @@ export class UsuariosService {
   }
 
   permisosAnunciante(): boolean {
-    return this.tienePermiso('ANUNCIANTE');
+    return this.tienePermiso('ESPECIAL');
   }
 
   permisosSuscriptor(): boolean {
