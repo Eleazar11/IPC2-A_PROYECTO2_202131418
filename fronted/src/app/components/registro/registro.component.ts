@@ -23,6 +23,7 @@ export class RegistroComponent {
   // Método para mostrar un mensaje al hacer clic en el botón
   mostrarMensaje() {
     this.mensaje = "Le diste click al botón de registrar.";
+    console.log('Usuario registrado:');
     setTimeout(() => this.mensaje = null, 3000); // El mensaje desaparece después de 3 segundos
   }
 

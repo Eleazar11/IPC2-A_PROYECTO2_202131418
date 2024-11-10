@@ -59,7 +59,6 @@ export class UsuariosService {
     localStorage.removeItem('token');
   }
 
-  // Métodos de permisos basados en roles
   permisosAdministrador(): boolean {
     return this.tienePermiso('ADMINISTRADOR');
   }
@@ -76,7 +75,6 @@ export class UsuariosService {
     return this.tienePermiso('SUSCRIPTOR');
   }
 
-  // Verificación de permisos a partir del rol en el token
   private tienePermiso(rol: string): boolean {
     const token = this.obtenerToken();
     console.log('VIENDOLO DESDE EL SERVICIO');
