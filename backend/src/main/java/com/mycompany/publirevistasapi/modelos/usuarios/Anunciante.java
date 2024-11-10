@@ -12,7 +12,7 @@ import java.sql.Date;
  */
 public class Anunciante extends Usuario {
 
-    public Anunciante(String nombreUsuario, String contrasena, String rol, String fotoPerfil, String hobbies, String temasInteres, String descripcion, String gustos, Date fechaCreacion, String estado) {
-        super(nombreUsuario, contrasena, rol, fotoPerfil, hobbies, temasInteres, descripcion, gustos, fechaCreacion, estado);
+    public Anunciante(String nombreUsuario, String contrasena) {
+        super(nombreUsuario, contrasena, Rol.ANUNCIANTE);
     }
 }

@@ -31,15 +31,7 @@ public class UsuarioService {
                 // Asegúrate de tener todos los valores necesarios para crear un Suscriptor
                 usuario = new Suscriptor(
                         usuario.getNombreUsuario(),
-                        usuario.getContrasena(),
-                        usuario.getRol().toString(),
-                        usuario.getFotoPerfil(),        // Foto de perfil
-                        usuario.getHobbies(),           // Hobbies
-                        usuario.getTemasInteres(),      // Temas de interés
-                        usuario.getDescripcion(),       // Descripción
-                        usuario.getGustos(),            // Gustos
-                        usuario.getFechaCreacion(),     // Fecha de creación
-                        usuario.getEstado()             // Estado
+                        usuario.getContrasena()
                 );
                 break;
 
@@ -47,15 +39,7 @@ public class UsuarioService {
                 // Los editores necesitan una cartera
                 usuario = new Editor(
                         usuario.getNombreUsuario(),
-                        usuario.getContrasena(),
-                        usuario.getRol().toString(),
-                        usuario.getFotoPerfil(),
-                        usuario.getHobbies(),
-                        usuario.getTemasInteres(),
-                        usuario.getDescripcion(),
-                        usuario.getGustos(),
-                        usuario.getFechaCreacion(),
-                        usuario.getEstado()
+                        usuario.getContrasena()
                 );
                 agregarCartera = true;  // Agregar cartera para los editores
                 break;
@@ -64,15 +48,7 @@ public class UsuarioService {
                 // Los anunciantes también necesitan una cartera
                 usuario = new Anunciante(
                         usuario.getNombreUsuario(),
-                        usuario.getContrasena(),
-                        usuario.getRol().toString(),
-                        usuario.getFotoPerfil(),
-                        usuario.getHobbies(),
-                        usuario.getTemasInteres(),
-                        usuario.getDescripcion(),
-                        usuario.getGustos(),
-                        usuario.getFechaCreacion(),
-                        usuario.getEstado()
+                        usuario.getContrasena()
                 );
                 agregarCartera = true;  // Agregar cartera para los anunciantes
                 break;
@@ -81,15 +57,7 @@ public class UsuarioService {
                 // Para los administradores, no se necesita agregar cartera
                 usuario = new Administrador(
                         usuario.getNombreUsuario(),
-                        usuario.getContrasena(),
-                        usuario.getRol().toString(),
-                        usuario.getFotoPerfil(),
-                        usuario.getHobbies(),
-                        usuario.getTemasInteres(),
-                        usuario.getDescripcion(),
-                        usuario.getGustos(),
-                        usuario.getFechaCreacion(),
-                        usuario.getEstado()
+                        usuario.getContrasena()
                 );
                 break;
 
@@ -106,7 +74,7 @@ public class UsuarioService {
         }
     }
 
-    public Usuario autenticarUsuario(String nombreUsuario, String contrasena) {
-        return usuarioDB.iniciarSesion(nombreUsuario, contrasena);
-    }
+//    public Usuario autenticarUsuario(String nombreUsuario, String contrasena) {
+//        return usuarioDB.iniciarSesion(nombreUsuario, contrasena);
+//    }
 }

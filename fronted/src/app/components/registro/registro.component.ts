@@ -32,13 +32,14 @@ export class RegistroComponent {
     if (form.valid) {
       // Obtener datos del formulario
       const formValue = form.value;
+      
 
       // Mapear los datos del formulario al objeto Usuario
       const usuario: Usuario = {
         nombreUsuario: formValue.nombreUsuario,
         contrasena: formValue.contrasena,
         rol: TipoUsuario[formValue.tipoUsuario as keyof typeof TipoUsuario], // Convertir el tipoUsuario a TipoUsuario
-        fotoPerfil: this.fotoPerfilBase64, // Ahora en formato base64
+        fotoPerfil: this.fotoPerfilBase64 || '', // Ahora en formato base64
         hobbies: formValue.hobbies || '', // Valor predeterminado si está vacío
         temasInteres: formValue.temasInteres || '',
         descripcion: formValue.descripcion || '',

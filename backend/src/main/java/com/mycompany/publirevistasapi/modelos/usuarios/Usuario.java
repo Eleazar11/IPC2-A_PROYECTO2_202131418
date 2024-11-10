@@ -13,7 +13,7 @@ import java.sql.Date;
 public class Usuario {
     private String nombreUsuario;
     private String contrasena;
-    private String rol; // Refleja el 'tipo_usuario' en la base de datos (puede ser 'editor', 'administrador', etc.)
+    private Rol rol; // Refleja el 'tipo_usuario' en la base de datos (puede ser 'editor', 'administrador', etc.)
     private String fotoPerfil; // Ruta de la foto de perfil
     private String hobbies;
     private String temasInteres;
@@ -21,8 +21,21 @@ public class Usuario {
     private String gustos;
     private Date fechaCreacion;
     private String estado; // Refleja el estado (activo, inactivo, suspendido)
+    
+    
+    public Usuario(String nombreUsuario, String contrasena, Rol rol) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = guardarContrasena(contrasena);
+        this.fotoPerfil = null;
+        this.hobbies = null;
+        this.temasInteres = null;
+        this.descripcion = null;
+        this.gustos = null;
+        this.estado = null;
+        this.rol = rol;
+    }
 
-    public Usuario(String nombreUsuario, String contrasena, String rol, String fotoPerfil, String hobbies, String temasInteres, String descripcion, String gustos, Date fechaCreacion, String estado) {
+    public Usuario(String nombreUsuario, String contrasena, Rol rol, String fotoPerfil, String hobbies, String temasInteres, String descripcion, String gustos, Date fechaCreacion) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
         this.rol = rol;
@@ -32,19 +45,17 @@ public class Usuario {
         this.descripcion = descripcion;
         this.gustos = gustos;
         this.fechaCreacion = fechaCreacion;
-        this.estado = estado;
     }
 
     public Usuario() {
     }
 
-    public Usuario(String nombreUsuario, String contrasena, String rol) {
-        this.nombreUsuario = nombreUsuario;
-        this.contrasena = contrasena;
-        this.rol = rol;
+    
+    
+    private String guardarContrasena(String contrasena){
+        Seguridad seguridad = new Seguridad();
+        return seguridad.encriptarContrasena(contrasena);
     }
-    
-    
     
 
     public String getNombreUsuario() {
@@ -63,13 +74,15 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    
 
     public String getFotoPerfil() {
         return fotoPerfil;

@@ -35,18 +35,23 @@ public class UsuarioDB {
             return false; // El usuario ya existe en la base de datos
         }
 
-        String consulta = "INSERT INTO usuarios (nombre, contrasena, tipo_usuario) VALUES (?, ?, ?)";
+        String consulta = "INSERT INTO usuarios (nombre, contrasena, tipo_usuario, foto_perfil, hobbies, temas_interes, descripcion, gustos) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(consulta)) {
             statement.setString(1, usuario.getNombreUsuario());
             statement.setString(2, usuario.getContrasena());
-            statement.setString(3, usuario.getRol()); // Tipo de usuario
+            statement.setString(3, usuario.getRol().toString()); // Tipo de usuario
+            statement.setString(4, usuario.getFotoPerfil()); // Foto perfil in Base64 format
+            statement.setString(5, usuario.getHobbies());
+            statement.setString(6, usuario.getTemasInteres());
+            statement.setString(7, usuario.getDescripcion());
+            statement.setString(8, usuario.getGustos());
 
             int filasAfectadas = statement.executeUpdate();
 
-            // Si el usuario es de tipo 'especial', crear registro en carteras_digitales
+            // If the user is 'especial' or 'editor', create a digital wallet entry
             if (usuario.getRol().equals("especial") || usuario.getRol().equals("editor")) {
                 registrarCarteraDigital(usuario.getNombreUsuario());
-                System.out.println("se creo una cartera digital");
+                System.out.println("Se creó una cartera digital");
             }
 
             return filasAfectadas > 0;
@@ -84,63 +89,59 @@ public class UsuarioDB {
         return false;
     }
 
-    // Método para autenticar usuario
-    public Usuario iniciarSesion(String nombreUsuario, String contrasena) {
-        Seguridad seguridad = new Seguridad();
-        Usuario usuarioObtenido = obtenerUsuario(nombreUsuario);
-
-        if (usuarioObtenido == null) {
-            return null;
-        }
-
-        // Verifica la contraseña usando un sistema de seguridad
-        if (seguridad.verificarContrasena(contrasena, usuarioObtenido.getContrasena())) {
-            return usuarioObtenido;
-        }
-
-        return null;
-    }
-
-    // Método para obtener un usuario por nombre de usuario
-    public Usuario obtenerUsuario(String nombreUsuario) {
-        String consulta = "SELECT * FROM usuarios WHERE nombre = ?";
-        try (PreparedStatement statement = connection.prepareStatement(consulta)) {
-            statement.setString(1, nombreUsuario);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    String nombre = resultSet.getString("nombre");
-                    String password = resultSet.getString("contrasena");
-                    String rol = resultSet.getString("tipo_usuario");
-                    String fotoPerfil = resultSet.getString("foto_perfil");
-                    String hobbies = resultSet.getString("hobbies");
-                    String temasInteres = resultSet.getString("temas_interes");
-                    String descripcion = resultSet.getString("descripcion");
-                    String gustos = resultSet.getString("gustos");
-                    Date fechaCreacion = resultSet.getDate("fecha_creacion");
-                    String estado = resultSet.getString("estado");
-
-                    // Construcción del usuario
-                    Usuario usuario = new Usuario(
-                            nombre, 
-                            password, 
-                            rol, 
-                            fotoPerfil, 
-                            hobbies, 
-                            temasInteres, 
-                            descripcion, 
-                            gustos, 
-                            fechaCreacion, 
-                            estado
-                    );
-                    return usuario;
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al obtener el usuario", e);
-        }
-        return null;
-    }
-
+//    // Método para autenticar usuario
+//    public Usuario iniciarSesion(String nombreUsuario, String contrasena) {
+//        Seguridad seguridad = new Seguridad();
+//        Usuario usuarioObtenido = obtenerUsuario(nombreUsuario);
+//
+//        if (usuarioObtenido == null) {
+//            return null;
+//        }
+//
+//        // Verifica la contraseña usando un sistema de seguridad
+//        if (seguridad.verificarContrasena(contrasena, usuarioObtenido.getContrasena())) {
+//            return usuarioObtenido;
+//        }
+//
+//        return null;
+//    }
+//    // Método para obtener un usuario por nombre de usuario
+//    public Usuario obtenerUsuario(String nombreUsuario) {
+//        String consulta = "SELECT * FROM usuarios WHERE nombre = ?";
+//        try (PreparedStatement statement = connection.prepareStatement(consulta)) {
+//            statement.setString(1, nombreUsuario);
+//            try (ResultSet resultSet = statement.executeQuery()) {
+//                if (resultSet.next()) {
+//                    String nombre = resultSet.getString("nombre");
+//                    String password = resultSet.getString("contrasena");
+//                    String rol = resultSet.getString("tipo_usuario");
+//                    String fotoPerfil = resultSet.getString("foto_perfil");
+//                    String hobbies = resultSet.getString("hobbies");
+//                    String temasInteres = resultSet.getString("temas_interes");
+//                    String descripcion = resultSet.getString("descripcion");
+//                    String gustos = resultSet.getString("gustos");
+//                    Date fechaCreacion = resultSet.getDate("fecha_creacion");
+//
+//                    // Construcción del usuario
+//                    Usuario usuario = new Usuario(
+//                            nombre, 
+//                            password, 
+//                            rol, 
+//                            fotoPerfil, 
+//                            hobbies, 
+//                            temasInteres, 
+//                            descripcion, 
+//                            gustos, 
+//                            fechaCreacion
+//                    );
+//                    return usuario;
+//                }
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error al obtener el usuario", e);
+//        }
+//        return null;
+//    }
     // Método para actualizar el perfil de un usuario
     public void actualizarUsuario(String nombreUsuario, String descripcion, String fotoPerfilPath) {
         String consulta = "UPDATE usuarios SET descripcion = ?, foto_perfil = ? WHERE nombre = ?";
