@@ -1,0 +1,17 @@
+com\mycompany\publirevistasapi\resources\JakartaEE10Resource.class
+com\mycompany\publirevistasapi\database\UsuarioDB.class
+com\mycompany\publirevistasapi\modelos\usuarios\Usuario.class
+com\mycompany\publirevistasapi\modelos\usuarios\Rol.class
+com\mycompany\publirevistasapi\JakartaRestConfiguration.class
+com\mycompany\publirevistasapi\util\GeneradorToken.class
+com\mycompany\publirevistasapi\config\CorsFilter.class
+com\mycompany\publirevistasapi\controladores\UsuarioController.class
+com\mycompany\publirevistasapi\database\CarteraDB.class
+com\mycompany\publirevistasapi\modelos\usuarios\Suscriptor.class
+com\mycompany\publirevistasapi\servicios\UsuarioService.class
+com\mycompany\publirevistasapi\modelos\usuarios\Anunciante.class
+com\mycompany\publirevistasapi\util\AuthFilter.class
+com\mycompany\publirevistasapi\modelos\usuarios\Seguridad.class
+com\mycompany\publirevistasapi\modelos\usuarios\Editor.class
+com\mycompany\publirevistasapi\database\DataSourceDBSingleton.class
+com\mycompany\publirevistasapi\modelos\usuarios\Administrador.class
