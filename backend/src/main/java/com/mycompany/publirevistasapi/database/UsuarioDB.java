@@ -35,14 +35,20 @@ public class UsuarioDB {
             return false; // El usuario ya existe en la base de datos
         }
 
-        String consulta = "INSERT INTO usuarios (nombre_usuario, contraseña, perfil, rol) VALUES (?, ?, ?, ?)";
+        String consulta = "INSERT INTO usuarios (nombre, contrasena, tipo_usuario, descripcion) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(consulta)) {
             statement.setString(1, usuario.getNombreUsuario());
             statement.setString(2, usuario.getContrasena());
-            statement.setString(3, usuario.getDescripcion());  // Asegúrate de que 'descripcion' es lo que se debe guardar
-            statement.setString(4, usuario.getRol()); // Aquí se guarda el rol como String
+            statement.setString(3, usuario.getRol()); // Tipo de usuario
+            statement.setString(4, usuario.getDescripcion());
 
             int filasAfectadas = statement.executeUpdate();
+
+            // Si el usuario es de tipo 'especial', crear registro en carteras_digitales
+            if (usuario.getRol().equals("especial")) {
+                registrarCarteraDigital(usuario.getNombreUsuario());
+            }
+
             return filasAfectadas > 0;
         } catch (SQLException e) {
             System.out.println("Error al registrar usuario: " + e.getMessage());
@@ -50,9 +56,20 @@ public class UsuarioDB {
         }
     }
 
+    // Método para registrar cartera digital si el usuario es de tipo 'especial'
+    private void registrarCarteraDigital(String nombreUsuario) {
+        String consultaCartera = "INSERT INTO carteras_digitales (nombre_usuario, saldo, fecha_creacion) VALUES (?, 0.00, CURRENT_DATE)";
+        try (PreparedStatement statementCartera = connection.prepareStatement(consultaCartera)) {
+            statementCartera.setString(1, nombreUsuario);
+            statementCartera.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error al registrar cartera digital: " + e.getMessage());
+        }
+    }
+
     // Método para verificar si el usuario ya existe en la base de datos
     private boolean existeUsuario(String nombreUsuario) {
-        String consulta = "SELECT COUNT(*) FROM usuarios WHERE nombre_usuario = ?";
+        String consulta = "SELECT COUNT(*) FROM usuarios WHERE nombre = ?";
         try (PreparedStatement statement = connection.prepareStatement(consulta)) {
             statement.setString(1, nombreUsuario);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -86,16 +103,15 @@ public class UsuarioDB {
 
     // Método para obtener un usuario por nombre de usuario
     public Usuario obtenerUsuario(String nombreUsuario) {
-        String consulta = "SELECT * FROM usuarios WHERE nombre_usuario = ?";
+        String consulta = "SELECT * FROM usuarios WHERE nombre = ?";
         try (PreparedStatement statement = connection.prepareStatement(consulta)) {
             statement.setString(1, nombreUsuario);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    String nombre = resultSet.getString("nombre_usuario");
-                    String password = resultSet.getString("contraseña");
-                    String perfil = resultSet.getString("perfil");
+                    String nombre = resultSet.getString("nombre");
+                    String password = resultSet.getString("contrasena");
+                    String rol = resultSet.getString("tipo_usuario");
                     String fotoPerfil = resultSet.getString("foto_perfil");
-                    String rol = resultSet.getString("rol");
                     String hobbies = resultSet.getString("hobbies");
                     String temasInteres = resultSet.getString("temas_interes");
                     String descripcion = resultSet.getString("descripcion");
@@ -103,7 +119,7 @@ public class UsuarioDB {
                     Date fechaCreacion = resultSet.getDate("fecha_creacion");
                     String estado = resultSet.getString("estado");
 
-                    // Aquí se construye el usuario con el constructor proporcionado
+                    // Construcción del usuario
                     Usuario usuario = new Usuario(
                             nombre, 
                             password, 
@@ -126,11 +142,11 @@ public class UsuarioDB {
     }
 
     // Método para actualizar el perfil de un usuario
-    public void actualizarUsuario(String nombreUsuario, String texto, String fotoPerfilPath) {
-        String consulta = "UPDATE usuarios SET perfil = ?, foto_perfil = ? WHERE nombre_usuario = ?";
+    public void actualizarUsuario(String nombreUsuario, String descripcion, String fotoPerfilPath) {
+        String consulta = "UPDATE usuarios SET descripcion = ?, foto_perfil = ? WHERE nombre = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(consulta)) {
-            stmt.setString(1, texto);
+            stmt.setString(1, descripcion);
             stmt.setString(2, fotoPerfilPath);
             stmt.setString(3, nombreUsuario);
             stmt.executeUpdate();
@@ -139,4 +155,3 @@ public class UsuarioDB {
         }
     }
 }
-

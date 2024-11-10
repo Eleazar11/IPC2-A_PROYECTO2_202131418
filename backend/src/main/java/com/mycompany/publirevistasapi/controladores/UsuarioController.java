@@ -43,6 +43,11 @@ public class UsuarioController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response registrarUsuario(Usuario usuario) {
         System.out.println("registro called");
+        if (usuario == null) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "No se ha enviado un usuario");
+            return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
+        }
         // Validación de datos
         if (usuario.getNombreUsuario() == null || usuario.getNombreUsuario().isEmpty()
                 || usuario.getContrasena() == null || usuario.getContrasena().isEmpty()
