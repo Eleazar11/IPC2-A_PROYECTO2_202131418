@@ -12,8 +12,8 @@ import java.sql.Date;
  */
 public class Suscriptor extends Usuario {
 
-    public Suscriptor(String nombreUsuario, String contrasena) {
-        super(nombreUsuario, contrasena, Rol.SUSCRIPTOR);
+    public Suscriptor(String nombreUsuario, String contrasena, String fotoPerfil, String hobbies, String temasInteres, String descripcion, String gustos) {
+        super(nombreUsuario, contrasena, Rol.SUSCRIPTOR, fotoPerfil, hobbies, temasInteres, descripcion, gustos);
     }
 }
 

@@ -12,7 +12,7 @@ import java.sql.Date;
  */
 public class Editor extends Usuario {
 
-    public Editor(String nombreUsuario, String contrasena) {
-        super(nombreUsuario, contrasena, Rol.EDITOR);
+    public Editor(String nombreUsuario, String contrasena, String fotoPerfil, String hobbies, String temasInteres, String descripcion, String gustos) {
+        super(nombreUsuario, contrasena, Rol.EDITOR, fotoPerfil, hobbies, temasInteres, descripcion, gustos);
     }
 }

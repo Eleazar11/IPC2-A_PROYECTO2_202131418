@@ -12,8 +12,8 @@ import java.sql.Date;
  */
 public class Administrador extends Usuario {
 
-    public Administrador(String nombreUsuario, String contrasena) {
-        super(nombreUsuario, contrasena, Rol.ADMINISTRADOR);
+    public Administrador(String nombreUsuario, String contrasena,String fotoPerfil, String hobbies, String temasInteres, String descripcion, String gustos) {
+        super(nombreUsuario, contrasena, Rol.ADMINISTRADOR, fotoPerfil, hobbies, temasInteres, descripcion, gustos);
     }
     
     

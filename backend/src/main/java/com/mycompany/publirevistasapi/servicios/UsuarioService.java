@@ -31,7 +31,12 @@ public class UsuarioService {
                 // Asegúrate de tener todos los valores necesarios para crear un Suscriptor
                 usuario = new Suscriptor(
                         usuario.getNombreUsuario(),
-                        usuario.getContrasena()
+                        usuario.getContrasena(), 
+                        usuario.getFotoPerfil(),
+                        usuario.getHobbies(),
+                        usuario.getTemasInteres(),
+                        usuario.getDescripcion(),
+                        usuario.getGustos()
                 );
                 break;
 
@@ -39,7 +44,11 @@ public class UsuarioService {
                 // Los editores necesitan una cartera
                 usuario = new Editor(
                         usuario.getNombreUsuario(),
-                        usuario.getContrasena()
+                        usuario.getContrasena(), usuario.getFotoPerfil(),
+                        usuario.getHobbies(),
+                        usuario.getTemasInteres(),
+                        usuario.getDescripcion(),
+                        usuario.getGustos()
                 );
                 agregarCartera = true;  // Agregar cartera para los editores
                 break;
@@ -48,7 +57,11 @@ public class UsuarioService {
                 // Los anunciantes también necesitan una cartera
                 usuario = new Anunciante(
                         usuario.getNombreUsuario(),
-                        usuario.getContrasena()
+                        usuario.getContrasena(), usuario.getFotoPerfil(),
+                        usuario.getHobbies(),
+                        usuario.getTemasInteres(),
+                        usuario.getDescripcion(),
+                        usuario.getGustos()
                 );
                 agregarCartera = true;  // Agregar cartera para los anunciantes
                 break;
@@ -57,7 +70,11 @@ public class UsuarioService {
                 // Para los administradores, no se necesita agregar cartera
                 usuario = new Administrador(
                         usuario.getNombreUsuario(),
-                        usuario.getContrasena()
+                        usuario.getContrasena(), usuario.getFotoPerfil(),
+                        usuario.getHobbies(),
+                        usuario.getTemasInteres(),
+                        usuario.getDescripcion(),
+                        usuario.getGustos()
                 );
                 break;
 

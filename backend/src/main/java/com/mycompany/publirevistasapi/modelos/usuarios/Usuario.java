@@ -23,14 +23,14 @@ public class Usuario {
     private String estado; // Refleja el estado (activo, inactivo, suspendido)
     
     
-    public Usuario(String nombreUsuario, String contrasena, Rol rol) {
+    public Usuario(String nombreUsuario, String contrasena, Rol rol, String fotoPerfil, String hobbies, String temasInteres, String descripcion, String gustos) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = guardarContrasena(contrasena);
-        this.fotoPerfil = null;
-        this.hobbies = null;
-        this.temasInteres = null;
-        this.descripcion = null;
-        this.gustos = null;
+        this.fotoPerfil = fotoPerfil;
+        this.hobbies = hobbies;
+        this.temasInteres = temasInteres;
+        this.descripcion = descripcion;
+        this.gustos = gustos;
         this.estado = null;
         this.rol = rol;
     }
