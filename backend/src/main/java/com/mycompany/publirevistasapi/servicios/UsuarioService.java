@@ -91,7 +91,7 @@ public class UsuarioService {
         }
     }
 
-//    public Usuario autenticarUsuario(String nombreUsuario, String contrasena) {
-//        return usuarioDB.iniciarSesion(nombreUsuario, contrasena);
-//    }
+    public Usuario autenticarUsuario(String nombreUsuario, String contrasena) {
+        return usuarioDB.iniciarSesion(nombreUsuario, contrasena);
+    }
 }

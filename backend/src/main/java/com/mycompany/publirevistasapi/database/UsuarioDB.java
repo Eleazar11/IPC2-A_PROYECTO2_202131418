@@ -89,59 +89,61 @@ public class UsuarioDB {
         return false;
     }
 
-//    // Método para autenticar usuario
-//    public Usuario iniciarSesion(String nombreUsuario, String contrasena) {
-//        Seguridad seguridad = new Seguridad();
-//        Usuario usuarioObtenido = obtenerUsuario(nombreUsuario);
-//
-//        if (usuarioObtenido == null) {
-//            return null;
-//        }
-//
-//        // Verifica la contraseña usando un sistema de seguridad
-//        if (seguridad.verificarContrasena(contrasena, usuarioObtenido.getContrasena())) {
-//            return usuarioObtenido;
-//        }
-//
-//        return null;
-//    }
-//    // Método para obtener un usuario por nombre de usuario
-//    public Usuario obtenerUsuario(String nombreUsuario) {
-//        String consulta = "SELECT * FROM usuarios WHERE nombre = ?";
-//        try (PreparedStatement statement = connection.prepareStatement(consulta)) {
-//            statement.setString(1, nombreUsuario);
-//            try (ResultSet resultSet = statement.executeQuery()) {
-//                if (resultSet.next()) {
-//                    String nombre = resultSet.getString("nombre");
-//                    String password = resultSet.getString("contrasena");
-//                    String rol = resultSet.getString("tipo_usuario");
-//                    String fotoPerfil = resultSet.getString("foto_perfil");
-//                    String hobbies = resultSet.getString("hobbies");
-//                    String temasInteres = resultSet.getString("temas_interes");
-//                    String descripcion = resultSet.getString("descripcion");
-//                    String gustos = resultSet.getString("gustos");
-//                    Date fechaCreacion = resultSet.getDate("fecha_creacion");
-//
-//                    // Construcción del usuario
-//                    Usuario usuario = new Usuario(
-//                            nombre, 
-//                            password, 
-//                            rol, 
-//                            fotoPerfil, 
-//                            hobbies, 
-//                            temasInteres, 
-//                            descripcion, 
-//                            gustos, 
-//                            fechaCreacion
-//                    );
-//                    return usuario;
-//                }
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException("Error al obtener el usuario", e);
-//        }
-//        return null;
-//    }
+    // Método para autenticar usuario
+    public Usuario iniciarSesion(String nombreUsuario, String contrasena) {
+        Seguridad seguridad = new Seguridad();
+        Usuario usuarioObtenido = obtenerUsuario(nombreUsuario);
+
+        if (usuarioObtenido == null) {
+            return null;
+        }
+        // Si la contraseña coincide con el hash almacenado, devuelve un objeto Usuario
+        if (seguridad.verificarContrasena(contrasena, usuarioObtenido.getContrasena())) {
+            System.out.println("Contraseña correcta");
+            return usuarioObtenido;
+        }
+
+        // Si no se encontró un usuario con las credenciales dadas, devuelve null
+        return null;
+    }
+    
+    // Método para obtener un usuario por nombre de usuario
+    public Usuario obtenerUsuario(String nombreUsuario) {
+        String consulta = "SELECT * FROM usuarios WHERE nombre = ?";
+        try (PreparedStatement statement = connection.prepareStatement(consulta)) {
+            statement.setString(1, nombreUsuario);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String nombre = resultSet.getString("nombre");
+                    String password = resultSet.getString("contrasena");
+                    String rol = resultSet.getString("tipo_usuario");
+                    String fotoPerfil = resultSet.getString("foto_perfil");
+                    String hobbies = resultSet.getString("hobbies");
+                    String temasInteres = resultSet.getString("temas_interes");
+                    String descripcion = resultSet.getString("descripcion");
+                    String gustos = resultSet.getString("gustos");
+                    Date fechaCreacion = resultSet.getDate("fecha_creacion");
+
+                    // Construcción del usuario
+                    Usuario usuario = new Usuario(
+                            nombre, 
+                            password, 
+                            Rol.valueOf(rol), 
+                            fotoPerfil, 
+                            hobbies, 
+                            temasInteres, 
+                            descripcion, 
+                            gustos, 
+                            fechaCreacion
+                    );
+                    return usuario;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al obtener el usuario", e);
+        }
+        return null;
+    }
     // Método para actualizar el perfil de un usuario
     public void actualizarUsuario(String nombreUsuario, String descripcion, String fotoPerfilPath) {
         String consulta = "UPDATE usuarios SET descripcion = ?, foto_perfil = ? WHERE nombre = ?";

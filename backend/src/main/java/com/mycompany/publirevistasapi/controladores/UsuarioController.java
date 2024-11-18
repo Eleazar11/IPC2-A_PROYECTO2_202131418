@@ -77,32 +77,32 @@ public class UsuarioController {
      * @param usuario El objeto Usuario con el nombre de usuario y la contraseña a autenticar.
      * @return Response con el resultado de la operación.
      */
-//    @POST
-//    @Path("/login")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response loginUsuario(Usuario usuario) {
-//        // Intentamos autenticar al usuario con las credenciales proporcionadas
-//        Usuario usuarioAutenticado = usuarioService.autenticarUsuario(usuario.getNombreUsuario(), usuario.getContrasena());
-//
-//        if (usuarioAutenticado != null) {
-//            // Si las credenciales son correctas, generamos un token JWT
-//            GeneradorToken generadorToken = new GeneradorToken();
-//            String token = generadorToken.crearTokenJWT(usuarioAutenticado);
-//
-//            Map<String, String> response = new HashMap<>();
-//            response.put("token", token);
-//
-//            // Retornamos el token JWT en la respuesta
-//            return Response.ok()
-//                    .header("Authorization", "Bearer " + token)
-//                    .entity(response)
-//                    .build();
-//        } else {
-//            // Si las credenciales son incorrectas, retornamos un error
-//            Map<String, String> response = new HashMap<>();
-//            response.put("error", "Credenciales incorrectas");
-//            return Response.status(Response.Status.UNAUTHORIZED).entity(response).build();
-//        }
-//    }
+    @POST
+    @Path("/login")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response loginUsuario(Usuario usuario) {
+        // Intentamos autenticar al usuario con las credenciales proporcionadas
+        Usuario usuarioAutenticado = usuarioService.autenticarUsuario(usuario.getNombreUsuario(), usuario.getContrasena());
+
+        if (usuarioAutenticado != null) {
+            // Si las credenciales son correctas, generamos un token JWT
+            GeneradorToken generadorToken = new GeneradorToken();
+            String token = generadorToken.crearTokenJWT(usuarioAutenticado);
+
+            Map<String, String> response = new HashMap<>();
+            response.put("token", token);
+
+            // Retornamos el token JWT en la respuesta
+            return Response.ok()
+                    .header("Authorization", "Bearer " + token)
+                    .entity(response)
+                    .build();
+        } else {
+            // Si las credenciales son incorrectas, retornamos un error
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Credenciales incorrectas");
+            return Response.status(Response.Status.UNAUTHORIZED).entity(response).build();
+        }
+    }
 }
