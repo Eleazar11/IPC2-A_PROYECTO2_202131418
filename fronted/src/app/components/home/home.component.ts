@@ -5,7 +5,7 @@ import { RegistroComponent } from "../registro/registro.component";
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, RouterOutlet, RegistroComponent],
+  //imports: [RouterLink, RouterLinkActive, RouterOutlet, RegistroComponent], unused import
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
